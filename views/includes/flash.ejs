@@ -1,0 +1,52 @@
+<style>
+  .flash-overlay {
+    position: fixed;
+    top: 30px;
+    left: auto;
+    transform: translateX(-50%);
+    z-index: 1050;
+    width: 50%;
+    max-width: 600px;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); 
+  }
+</style>
+
+<% if(success && success.length){ %>
+<div
+  class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-3 flash-overlay"
+  role="alert"
+>
+  <%= success %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %> <% if(error && error.length){ %>
+<div
+  class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-3 flash-overlay"
+  role="alert"
+>
+  <%= error %>
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
+<% } %>
+
+<script>
+  setTimeout(() => {
+    const alerts = document.querySelectorAll(".flash-overlay");
+    alerts.forEach((alert) => {
+      alert.classList.remove("show"); // Bootstrap's 'fade-out' animation
+      setTimeout(() => alert.remove(), 300); // Remove from DOM after animation
+    });
+  }, 3000); // 3000ms = 3 seconds
+</script>
